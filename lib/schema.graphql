@@ -1,0 +1,89 @@
+"Represents store"
+type Store {
+  _id: ID!
+  "Nombre de la tienda"
+  name: String!
+  "url de la tienda"
+  url: String
+  "lista de productos de la tienda"
+  products: [Product]
+}
+
+"Represents product"
+type Product {
+  _id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: String!
+  currency: String!
+  value: Float!
+  url: String!
+  image: String!
+}
+
+type Query {
+  "Get all Stores"
+  getStores: [Store]
+  "Get Stores by name"
+  getStoresByName(name: String!): [Store]
+  "Get Store by id"
+  getStore(id: ID!): Store
+  "Get all Products"
+  getProducts: [Product]
+  "Get Products by keyword"
+  getProductsByKeyword(keyword: String!): [Product]
+  "Get Product by id"
+  getProduct(id: ID!): Product
+  "Get Product by id"
+  getProductBySku(sku: String!): Product
+}
+
+input StoreInput {
+  name: String!
+  url: String!
+}
+
+input ProductInput {
+  sku: String!
+  name: String!
+  description: String
+  brand: String!
+  url: String!
+  currency: String!
+  value: Float!
+  image: String!
+}
+
+input StoreInputEdit {
+  name: String
+  url: String
+}
+
+input ProductInputEdit {
+  sku: String
+  name: String
+  description: String
+  brand: String
+  url: String
+  currency: String
+  value: Float
+  image: String
+}
+
+type Mutation {
+  "Create store"
+  createStore(input: StoreInput!): Store
+  "Edit Store"
+  editStore(id: ID!, input: StoreInputEdit!): Store
+  "Deleted Store"
+  deletedStore(id: ID!): Boolean
+  "Create Product"
+  createProduct(input: ProductInput!): Product
+  "Edit Product"
+  editProduct(id: ID!, input: ProductInputEdit!): Product
+  "Deleted Product"
+  deletedProduct(id: ID!): Boolean
+  "Add Products to Store"
+  addProducts(prodsIds: [ID]!, storeId: ID!): Store
+}

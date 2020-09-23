@@ -84,6 +84,6 @@ type Mutation {
   editProduct(id: ID!, input: ProductInputEdit!): Product
   "Deleted Product"
   deletedProduct(id: ID!): Boolean
-  "Add Products to Store"
-  addProducts(prodsIds: [ID]!, storeId: ID!): Store
+  "Add one Product to Store"
+  addProduct(prodId: ID!, storeId: ID!): Store
 }

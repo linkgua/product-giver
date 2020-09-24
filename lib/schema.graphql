@@ -32,7 +32,7 @@ type Query {
   "Get all Products"
   getProducts: [Product]
   "Get Products by keyword"
-  getProductsByKeyword(keyword: String!): [Product]
+  getProductsByKeyword(keyword: String!, skip: Int, take: Int): [Product]
   "Get Product by id"
   getProduct(id: ID!): Product
   "Get Product by id"

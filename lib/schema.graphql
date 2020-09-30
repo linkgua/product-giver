@@ -1,3 +1,5 @@
+scalar Date
+
 "Represents store"
 type Store {
   _id: ID!
@@ -7,6 +9,8 @@ type Store {
   url: String
   "lista de productos de la tienda"
   products: [Product]
+  "Fecha de actualizacion"
+  date: Date!
 }
 
 "Represents product"
@@ -20,6 +24,8 @@ type Product {
   value: Float!
   url: String!
   image: String!
+  "Fecha de actualizacion"
+  date: Date!
 }
 
 type Query {
@@ -42,6 +48,7 @@ type Query {
 input StoreInput {
   name: String!
   url: String!
+  date: Date!
 }
 
 input ProductInput {
@@ -53,11 +60,13 @@ input ProductInput {
   currency: String!
   value: Float!
   image: String!
+  date: Date!
 }
 
 input StoreInputEdit {
   name: String
   url: String
+  date: Date!
 }
 
 input ProductInputEdit {
@@ -69,6 +78,7 @@ input ProductInputEdit {
   currency: String
   value: Float
   image: String
+  date: Date!
 }
 
 type Mutation {

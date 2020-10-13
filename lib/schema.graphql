@@ -7,8 +7,6 @@ type Store {
   name: String!
   "url de la tienda"
   url: String
-  "lista de productos de la tienda"
-  products: [Product]
   "Fecha de actualizacion"
   date: Date!
 }
@@ -24,6 +22,7 @@ type Product {
   value: Float!
   url: String!
   image: String!
+  stores: [Store]
   "Fecha de actualizacion"
   date: Date!
 }
@@ -94,6 +93,6 @@ type Mutation {
   editProduct(id: ID!, input: ProductInputEdit!): Product
   "Deleted Product"
   deletedProduct(id: ID!): Boolean
-  "Add one Product to Store"
-  addProduct(prodId: ID!, storeId: ID!): Store
+  "Add store to product"
+  addStoreToProduct(prodId: ID!, storeId: ID!): Store
 }

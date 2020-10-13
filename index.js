@@ -43,6 +43,12 @@ app.use(
   })
 );
 
+app.get("/thumbnails/:id", (req, res, next) => {
+  const { id } = req.params;
+  path = `./thumbnails/${id}.jpg`
+  res.sendFile(path, { root: '.' })
+})
+
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}/api`);
 });

@@ -6,7 +6,7 @@ const { graphqlHTTP } = require("express-graphql");
 const { readFileSync } = require("fs");
 const { join } = require("path");
 const resolvers = require("./lib/resolvers");
-
+const { saveImageOfProducts } = require("./utils/jimp")
 const app = express();
 const port = process.env.port || 3000;
 if (process.env.NODE_ENV === "production") {
@@ -33,7 +33,7 @@ const typeDefs = readFileSync(
   "utf-8"
 );
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-
+setInterval(saveImageOfProducts, 4320000)
 app.use(
   "/api",
   graphqlHTTP({

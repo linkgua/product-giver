@@ -36,7 +36,7 @@ type Query {
   "Get Store by id"
   getStore(id: ID!): Store
   "Get all Products"
-  getProducts(skip: Int, take: Int): [Product]
+  getProductsByStores(storesIDs: [String]!, skip: Int, take: Int): [Product]
   "Get Products by keyword and stores"
   getProductsByKeywordAndStore(
     keyword: String!

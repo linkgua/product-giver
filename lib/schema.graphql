@@ -53,6 +53,7 @@ type Query {
 input StoreInput {
   name: String!
   url: String!
+  lang: String!
   date: Date!
 }
 
@@ -71,6 +72,7 @@ input ProductInput {
 input StoreInputEdit {
   name: String
   url: String
+  lang: String
   date: Date!
 }
 

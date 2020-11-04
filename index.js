@@ -49,6 +49,11 @@ app.get("/thumbnails/:id", (req, res, next) => {
   res.sendFile(path, { root: '.' })
 })
 
+app.get("/thumbnails", (req, res, next) => {
+  saveImageOfProducts()
+  res.status(200).send('Creating Images')
+})
+
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}/api`);
 });

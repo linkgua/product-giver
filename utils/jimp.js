@@ -7,9 +7,9 @@ const saveImageOfProducts = async () => {
   const products = await db.collection("products").find({}).toArray()
   products.map(prod => {
     if (!prod.image) {
-      saveImage(product.value.originalImage, product.value._id)
+      saveImage(prod.value.originalImage, prod.value._id)
       prod.image = `${IMAGE_URL}${prod._id}`
-      db.collection("products").findOneAndUpdate({ sku: input.sku }, { $set: input })
+      db.collection("products").findOneAndUpdate({ sku: prod.sku }, { $set: prod })
     }
   })
 }

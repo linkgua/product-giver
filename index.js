@@ -49,9 +49,9 @@ app.get("/thumbnails/:id", (req, res, next) => {
   res.sendFile(path, { root: '.' })
 })
 
-app.get("/thumbnails", (req, res, next) => {
-  saveImageOfProducts()
-  res.status(200).send('Creating Images')
+app.get("/thumbnails", async (req, res, next) => {
+  const resp = await saveImageOfProducts()
+  res.status(200).send(`Creating Images? ${resp}`)
 })
 
 app.listen(port, () => {

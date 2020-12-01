@@ -1,26 +1,29 @@
+//DEBUG=app:* node scripts/jimp.js
 const jimp = require('jimp')
+const { config: { IMAGE_URL } } = require('../config')
 const fs = require('fs')
 const out = fs.createWriteStream("./logs/images.log");
-const connectDB = require("../lib/db");
-const errorHandler = require("../lib/errorHandler");
 const consoleFile = new console.Console(out);
-const { IMAGE_URL } = process.env
+const connectDB = require("../lib/db");
+
 
 const saveImageOfProducts = async () => {
   const db = await connectDB();
   const products = await db.collection("products").find({}).toArray()
+  console.log(`${products.length} products`)
   products.map(async (prod) => {
-    // if (!prod.image) {
-    try {
-      await saveImage(prod.originalImage, prod._id)
-      prod.image = `${IMAGE_URL}${prod._id}`
-      db.collection("products").findOneAndUpdate({ sku: prod.sku }, { $set: prod })
-      return prod
+    consoleFile.log(`${prod.id} checked`)
+    if (!prod.image) {
+      try {
+        await saveImage(prod.originalImage, prod._id)
+        prod.image = `${IMAGE_URL}${prod._id}`
+        db.collection("products").findOneAndUpdate({ sku: prod.sku }, { $set: prod })
+        return prod
+      }
+      catch (error) {
+        console.error(error)
+      }
     }
-    catch (error) {
-      errorHandler(error)
-    }
-    // }
   })
   return true
 }
@@ -34,12 +37,9 @@ const saveImage = async (url, id) => {
       await image.cover(175, 200).writeAsync(path);
       consoleFile.log(`Image save of: ${id} ${new Date}`)
     } catch (error) {
-      consoleFile.log(error)
-      return error
+      console.error(error)
     }
   }
 }
 
-module.exports = {
-  saveImageOfProducts
-}
+saveImageOfProducts()

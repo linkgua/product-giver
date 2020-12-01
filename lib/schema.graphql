@@ -22,7 +22,7 @@ type Product {
   value: Float!
   url: String!
   originalImage: String!
-  image: String!
+  image: String
   stores: [Store]
   "Fecha de actualizacion"
   date: Date!

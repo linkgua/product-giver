@@ -23,6 +23,8 @@ type Product {
   url: String!
   originalImage: String!
   image: String
+  tags: [String]
+  metadata: String
   stores: [Store]
   "Fecha de actualizacion"
   date: Date!
@@ -65,6 +67,8 @@ input ProductInput {
   url: String!
   currency: String!
   value: Float!
+  tags: [String]
+  metadata: String
   originalImage: String!
   date: Date!
 }
@@ -86,6 +90,8 @@ input ProductInputEdit {
   value: Float
   originalImage: String
   image: String
+  tags: [String]
+  metadata: String
   date: Date!
 }
 

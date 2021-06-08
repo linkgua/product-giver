@@ -1,6 +1,6 @@
 const { makeExecutableSchema } = require("graphql-tools");
 const express = require("express");
-const { config } = require("./config")
+const { config } = require("./config");
 const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const { readFileSync } = require("fs");
@@ -8,9 +8,10 @@ const { join } = require("path");
 const resolvers = require("./lib/resolvers");
 const app = express();
 
-if (config.dev) {
-  var corsOptionsDelegate = function (req, callback) {
-    var corsOptions;
+if (!config.dev) {
+  const corsOptionsDelegate = function (req, callback) {
+    console.log(req.header("Origin"));
+    let corsOptions = "";
     if (config.allowlist.indexOf(req.header("Origin")) !== -1) {
       corsOptions = { origin: true };
     } else {
@@ -41,9 +42,9 @@ app.use(
 
 app.get("/thumbnails/:id", (req, res, next) => {
   const { id } = req.params;
-  path = `./thumbnails/${id}.jpg`
-  res.sendFile(path, { root: '.' })
-})
+  path = `./thumbnails/${id}.jpg`;
+  res.sendFile(path, { root: "." });
+});
 
 app.listen(config.port, () => {
   console.log(`Server is listening at http://localhost:${config.port}/api`);

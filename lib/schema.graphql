@@ -9,6 +9,10 @@ type Store {
   url: String
   "Fecha de actualizacion"
   date: Date!
+  "Trazabilidad de los productos"
+  traceability: String
+  "URL para trazabilidad"
+  deepLink: String
 }
 
 "Represents product"
@@ -56,6 +60,8 @@ input StoreInput {
   name: String!
   url: String!
   lang: String!
+  traceability: String
+  deepLink: String
   date: Date!
 }
 
@@ -77,6 +83,8 @@ input StoreInputEdit {
   name: String
   url: String
   lang: String
+  traceability: String
+  deepLink: String
   date: Date!
 }
 
@@ -92,6 +100,7 @@ input ProductInputEdit {
   image: String
   tags: [String]
   metadata: String
+  stores: [String]
   date: Date!
 }
 
@@ -104,10 +113,17 @@ type Mutation {
   deletedStore(id: ID!): Boolean
   "Create Product"
   createProduct(input: ProductInput!): Product
+  "Create multiple products"
+  createMultipleProducts(input: [ProductInput!]): [Product]
   "Edit Product"
   editProduct(id: ID!, input: ProductInputEdit!): Product
+  "Edit Multiple Products"
+  editMultipleProducts(ids: [ID!], inputs: [ProductInputEdit!]): [Product]
+  editProductByKeyword(keyword: String!, input: ProductInputEdit!): [Product]
   "Deleted Product"
   deletedProduct(id: ID!): Boolean
   "Add store to product"
   addStoreToProduct(prodId: ID!, storeId: ID!): Store
+  "Add store to product, multiple"
+  addStoreToProductMultiple(prodIdArray: [ID!], storeIdArray: [ID!]): Store
 }

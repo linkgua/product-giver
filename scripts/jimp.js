@@ -59,4 +59,4 @@ const saveImage = async (url, id) => {
   }
 };
 
-saveImageOfProducts();
+module.exports = saveImageOfProducts;

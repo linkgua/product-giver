@@ -54,6 +54,9 @@ type Query {
   getProduct(id: ID!): Product
   "Get Product by id"
   getProductBySku(sku: String!): Product
+  getProductsById(ids: [ID!]): [Product]
+  getProductsByUrl(urls: [String!]): [Product]
+
 }
 
 input StoreInput {
@@ -114,7 +117,7 @@ type Mutation {
   "Create Product"
   createProduct(input: ProductInput!): Product
   "Create multiple products"
-  createMultipleProducts(input: [ProductInput!]): [Product]
+  createMultipleProducts(input: [ProductInput!]): [ID]
   "Edit Product"
   editProduct(id: ID!, input: ProductInputEdit!): Product
   "Edit Multiple Products"
@@ -125,5 +128,5 @@ type Mutation {
   "Add store to product"
   addStoreToProduct(prodId: ID!, storeId: ID!): Store
   "Add store to product, multiple"
-  addStoreToProductMultiple(prodIdArray: [ID!], storeIdArray: [ID!]): Store
+  addStoreToProductMultiple(prodIdArray: [ID!], storeIdArray: [ID!]): Boolean
 }

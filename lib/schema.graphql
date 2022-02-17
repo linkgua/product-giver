@@ -80,6 +80,7 @@ input ProductInput {
   metadata: String
   originalImage: String!
   date: Date!
+  loadSource:String
 }
 
 input StoreInputEdit {
@@ -129,4 +130,5 @@ type Mutation {
   addStoreToProduct(prodId: ID!, storeId: ID!): Store
   "Add store to product, multiple"
   addStoreToProductMultiple(prodIdArray: [ID!], storeIdArray: [ID!]): Boolean
+  deleteMultipleProductsFromScrap(loadDate:Date!): Boolean
 }
